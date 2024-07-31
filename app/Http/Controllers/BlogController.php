@@ -13,15 +13,16 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        $products = Blog::paginate(10);
+        return view('post.index', compact('post'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Blog $post)
     {
-        //
+        return view('post.create', compact('post'));
     }
 
     /**
@@ -29,15 +30,15 @@ class BlogController extends Controller
      */
     public function store(StoreblogRequest $request)
     {
-        //
-    }
+        $request->validate([
+            'tittle' => 'required|text|max:25',
+            'content' => 'required|text',
+            'status' => 'required|string',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(blog $blog)
-    {
-        //
+        $post = Blog::create($request->all());
+
+        return redirect()->route('blog.index')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -45,7 +46,7 @@ class BlogController extends Controller
      */
     public function edit(blog $blog)
     {
-        //
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -53,7 +54,11 @@ class BlogController extends Controller
      */
     public function update(UpdateblogRequest $request, blog $blog)
     {
-        //
+        $request->validate([
+            'tittle' => 'required|text|max:25',
+            'content' => 'required|text',
+            'status' => 'required|string',
+        ]);
     }
 
     /**
@@ -61,6 +66,8 @@ class BlogController extends Controller
      */
     public function destroy(blog $blog)
     {
-        //
+        $blog->delete();
+
+        return redirect()->route('blog.index')->with('success', 'Post deleted successfully.');
     }
 }
