@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\blog;
+use App\Models\Blog;
 use App\Http\Requests\StoreblogRequest;
 use App\Http\Requests\UpdateblogRequest;
 
@@ -14,7 +14,7 @@ class BlogController extends Controller
     public function index()
     {
         $products = Blog::paginate(10);
-        return view('post.index', compact('post'));
+        return view('blog.index', compact('blog'));
     }
 
     /**
@@ -22,7 +22,7 @@ class BlogController extends Controller
      */
     public function create(Blog $post)
     {
-        return view('post.create', compact('post'));
+        return view('blog.create', compact('blog'));
     }
 
     /**
@@ -46,7 +46,7 @@ class BlogController extends Controller
      */
     public function edit(blog $blog)
     {
-        return view('post.edit', compact('post'));
+        return view('blog.edit', compact('blog'));
     }
 
     /**
