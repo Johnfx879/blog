@@ -20,9 +20,9 @@ class BlogController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Blog $post)
+    public function create()
     {
-        return view('blogs.create', compact('blog'));
+        return view('blogs.create');
     }
 
     /**
@@ -31,12 +31,12 @@ class BlogController extends Controller
     public function store(StoreblogRequest $request)
     {
         $request->validate([
-            'tittle' => 'required|text|max:25',
+            'tittle' => 'required|string|max:20',
             'content' => 'required|text',
             'status' => 'required|string',
         ]);
 
-        $post = Blog::create($request->all());
+        Blog::create($request->all());
 
         return redirect()->route('blogs.index')->with('success', 'Post created successfully.');
     }
@@ -44,7 +44,7 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(blog $blog)
+    public function edit(Blog $blog)
     {
         return view('blogs.edit', compact('blog'));
     }
@@ -52,11 +52,13 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateblogRequest $request, blog $blog)
+    public function update(UpdateblogRequest $request, Blog $blog)
     {
+        $this->authorize('update', $blog);
+
         $request->validate([
-            'tittle' => 'required|text|max:25',
-            'content' => 'required|text',
+            'tittle' => 'required|string|max:255',
+            'content' => 'nullable|string',
             'status' => 'required|string',
         ]);
 
@@ -68,7 +70,7 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(blog $blog)
+    public function destroy(Blog $blog)
     {
         $blog->delete();
 
