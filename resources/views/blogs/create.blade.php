@@ -15,8 +15,8 @@
 
                     <div class="grid grid-cols-1 gap-6">
                         <div>
-                            <label for="tittle" class="block text-sm font-medium text-gray-700">{{ __('Title') }}</label>
-                            <input id="tittle" name="tittle" type="text" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            <label for="title" class="block text-sm font-medium text-gray-700">{{ __('Title') }}</label>
+                            <input id="title" name="title" type="text" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                         </div>
 
                         <div>

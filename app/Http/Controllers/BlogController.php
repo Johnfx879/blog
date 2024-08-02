@@ -20,9 +20,9 @@ class BlogController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(blog $blog)
     {
-        return view('blogs.create');
+        return view('blogs.create', compact('blog'));
     }
 
     /**
@@ -31,7 +31,7 @@ class BlogController extends Controller
     public function store(StoreblogRequest $request)
     {
         $request->validate([
-            'tittle' => 'required|string|max:20',
+            'title' => 'required|string|max:20',
             'content' => 'required|text',
             'status' => 'required|string',
         ]);
@@ -57,7 +57,7 @@ class BlogController extends Controller
         $this->authorize('update', $blog);
 
         $request->validate([
-            'tittle' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'content' => 'nullable|string',
             'status' => 'required|string',
         ]);
