@@ -28,6 +28,9 @@
                     <span class="inline-block px-2 py-1 mt-2 text-xs font-semibold text-white {{ $blog->status == 'published' ? 'bg-green-500' : 'bg-red-500' }}">
                         {{ ucfirst($blog->status) }}
                     </span>
+                    <div class="mt-4">
+                        <a href="{{ route('blog.edit', $blog) }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-600 focus:outline-none focus:border-yellow-700 focus:ring ring-yellow-200 disabled:opacity-25 transition ease-in-out duration-150">Edit</a>
+                    </div>
                 </li>
             @endforeach
         </ul>
