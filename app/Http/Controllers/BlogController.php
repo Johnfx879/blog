@@ -54,11 +54,11 @@ class BlogController extends Controller
      */
     public function update(UpdateblogRequest $request, Blog $blog)
     {
-        $this->authorize('update', $blog);
+  
 
         $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'nullable|string',
+            'title' => 'required|string|max:20',
+            'content' => 'required|text',
             'status' => 'required|string',
         ]);
 
