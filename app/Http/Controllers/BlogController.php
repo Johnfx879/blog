@@ -32,13 +32,13 @@ class BlogController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:20',
-            'content' => 'required|text',
+            'content' => 'required|string',  
             'status' => 'required|string',
         ]);
 
         Blog::create($request->all());
 
-        return redirect()->route('blogs.index')->with('success', 'Post created successfully.');
+        return redirect()->route('blog.index')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -54,11 +54,11 @@ class BlogController extends Controller
      */
     public function update(UpdateblogRequest $request, Blog $blog)
     {
-  
+
 
         $request->validate([
             'title' => 'required|string|max:20',
-            'content' => 'required|text',
+            'content' => 'required|string',
             'status' => 'required|string',
         ]);
 
