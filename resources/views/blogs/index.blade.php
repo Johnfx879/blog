@@ -30,6 +30,13 @@
                     </span>
                     <div class="mt-4">
                         <a href="{{ route('blog.edit', $blog) }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-600 focus:outline-none focus:border-yellow-700 focus:ring ring-yellow-200 disabled:opacity-25 transition ease-in-out duration-150">Edit</a>
+
+                        <form action="{{ route('blog.destroy', $blog) }}" method="POST" class="inline-block ml-2">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:outline-none focus:border-red-700 focus:ring ring-red-200 disabled:opacity-25 transition ease-in-out duration-150"
+                                onclick="return confirm('Are you sure you want to delete this post?');">Delete</button>
+                        </form>
                     </div>
                 </li>
             @endforeach

@@ -54,8 +54,6 @@ class BlogController extends Controller
      */
     public function update(UpdateblogRequest $request, Blog $blog)
     {
-
-
         $request->validate([
             'title' => 'required|string|max:20',
             'content' => 'required|string',
@@ -74,6 +72,6 @@ class BlogController extends Controller
     {
         $blog->delete();
 
-        return redirect()->route('blogs.index')->with('success', 'Post deleted successfully.');
+        return redirect()->route('blog.index')->with('success', 'Post deleted successfully.');
     }
 }
