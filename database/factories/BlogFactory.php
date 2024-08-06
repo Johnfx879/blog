@@ -6,24 +6,18 @@ use App\Models\Blog;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\blog>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Blog>
  */
 class BlogFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-
-     protected $model = Blog::class;
+    protected $model = Blog::class;
 
     public function definition(): array
     {
         return [
-          'title' => $this->faker->word,
-            'content' => $this->faker->sentence,
-            'status' => $this->faker->sentence,
+            'title' => $this->faker->text(20),
+            'content' => $this->faker->paragraph,
+            'status' => $this->faker->randomElement(['draft', 'published', 'archived']),
         ];
     }
 }
