@@ -29,6 +29,7 @@
                             <select id="status" name="status" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                                 <option value="draft">{{ __('Draft') }}</option>
                                 <option value="published">{{ __('Published') }}</option>
+                                <option value="archieved">{{ __('Archieved') }}</option>
                             </select>
                         </div>
 
