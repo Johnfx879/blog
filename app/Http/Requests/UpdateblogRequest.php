@@ -11,7 +11,7 @@ class UpdateblogRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true; // Change this to `true` to allow the request
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateblogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:20',
+            'content' => 'required|string',
+            'status' => 'required|string',
         ];
     }
 }
