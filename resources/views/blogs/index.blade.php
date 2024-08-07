@@ -20,9 +20,6 @@
                             <a href="{{ route('blog.show', $blog) }}" class="text-xl font-semibold block">{{ $blog->title }}</a>
                             <p class="text-sm text-gray-600">
                                 {{ $blog->created_at->diffForHumans() }} 
-                                @if($blog->user)
-                                    by {{ $blog->user->name }}
-                                @endif
                             </p>
                             <p class="mt-2 text-gray-800">
                                 {{ Str::limit($blog->content, 100) }}
