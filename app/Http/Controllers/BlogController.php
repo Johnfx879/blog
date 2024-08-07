@@ -53,17 +53,11 @@ class BlogController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateblogRequest $request, Blog $blog)
-    {
-        $request->validate([
-            'title' => 'required|string|max:20',
-            'content' => 'required|string',
-            'status' => 'required|string',
-        ]);
+{
+    $blog->update($request->validated());
 
-        $blog->update($request->all());
-
-        return redirect()->route('blogs.index')->with('success', 'Post updated successfully.');
-    }
+    return redirect()->route('blog.index')->with('success', 'Post updated successfully.');
+}
 
     /**
      * Remove the specified resource from storage.
