@@ -29,17 +29,11 @@ class BlogController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreblogRequest $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:20',
-            'content' => 'required|string',  
-            'status' => 'required|string',
-        ]);
+{
+    Blog::create($request->all());
 
-        Blog::create($request->all());
-
-        return redirect()->route('blog.index')->with('success', 'Post created successfully.');
-    }
+    return redirect()->route('blog.index')->with('success', 'Post created successfully.');
+}
 
     /**
      * Show the form for editing the specified resource.

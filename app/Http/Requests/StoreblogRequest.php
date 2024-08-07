@@ -22,7 +22,9 @@ class StoreblogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:20',
+            'content' => 'required|string',  
+            'status' => 'required|string',
         ];
     }
 }
