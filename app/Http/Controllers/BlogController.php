@@ -20,20 +20,20 @@ class BlogController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(blog $blog)
+    public function create()
     {
-        return view('blogs.create', compact('blog'));
+        return view('blogs.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreblogRequest $request)
-{
-    Blog::create($request->all());
+    {
+        Blog::create($request->all());
 
-    return redirect()->route('blog.index')->with('success', 'Post created successfully.');
-}
+        return redirect()->route('blog.index')->with('success', 'Post created successfully.');
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -47,11 +47,11 @@ class BlogController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateblogRequest $request, Blog $blog)
-{
-    $blog->update($request->validated());
+    {
+        $blog->update($request->validated());
 
-    return redirect()->route('blog.index')->with('success', 'Post updated successfully.');
-}
+        return redirect()->route('blog.index')->with('success', 'Post updated successfully.');
+    }
 
     /**
      * Remove the specified resource from storage.
