@@ -16,20 +16,20 @@
                     <div class="grid grid-cols-1 gap-6">
                         <div>
                             <label for="title" class="block text-sm font-medium text-gray-700">{{ __('Title') }}</label>
-                            <input id="title" name="title" type="text" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            <input id="title" name="title" type="text" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('title') }}">
                         </div>
 
                         <div>
                             <label for="content" class="block text-sm font-medium text-gray-700">{{ __('Content') }}</label>
-                            <textarea id="content" name="content" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></textarea>
+                            <textarea id="content" name="content" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('content') }}</textarea>
                         </div>
 
                         <div>
                             <label for="status" class="block text-sm font-medium text-gray-700">{{ __('Status') }}</label>
                             <select id="status" name="status" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <option value="draft">{{ __('Draft') }}</option>
-                                <option value="published">{{ __('Published') }}</option>
-                                <option value="archieved">{{ __('Archieved') }}</option>
+                                <option value="draft" {{ old('status') == 'draft' ? 'selected' : '' }}>{{ __('Draft') }}</option>
+                                <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>{{ __('Published') }}</option>
+                                <option value="archived" {{ old('status') == 'archived' ? 'selected' : '' }}>{{ __('Archived') }}</option>
                             </select>
                         </div>
 
