@@ -15,7 +15,10 @@
                     <div class="grid grid-cols-1 gap-6">
                         <div>
                             <label for="title" class="block text-sm font-medium text-gray-700">{{ __('Title') }}</label>
-                            <input id="title" name="title" type="text" value="{{ old('title', $blog->title) }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            <input id="title" name="title" type="text" value="{{ old('title', $blog->title) }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('title') border-red-500 @enderror">
+                            @error('title')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div>
