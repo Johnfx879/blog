@@ -15,26 +15,28 @@
                     <div class="grid grid-cols-1 gap-6">
                         <div>
                             <label for="title" class="block text-sm font-medium text-gray-700">{{ __('Title') }}</label>
-                            <input id="title" name="title" type="text" value="{{ old('title', $blog->title) }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('title') border-red-500 @enderror">
+                            <input id="title" name="title" type="text" value="{{ old('title', $blog->title) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('title') border-red-500 @enderror">
                             @error('title')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
-
+                        
                         <div>
                             <label for="content" class="block text-sm font-medium text-gray-700">{{ __('Content') }}</label>
-                            <textarea id="content" name="content" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('content', $blog->content) }}</textarea>
+                            <textarea id="content" name="content" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('content') border-red-500 @enderror">{{ old('content', $blog->content) }}</textarea>
+                            @error('content')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
-
+                        
                         <div>
                             <label for="status" class="block text-sm font-medium text-gray-700">{{ __('Status') }}</label>
-                            <select id="status" name="status" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            <select id="status" name="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('status') border-red-500 @enderror">
                                 <option value="draft" {{ old('status', $blog->status) == 'draft' ? 'selected' : '' }}>{{ __('Draft') }}</option>
                                 <option value="published" {{ old('status', $blog->status) == 'published' ? 'selected' : '' }}>{{ __('Published') }}</option>
                                 <option value="archived" {{ old('status', $blog->status) == 'archived' ? 'selected' : '' }}>{{ __('Archived') }}</option>
                             </select>
-                        </div>
-
+                            
                         <div class="flex items-center justify-end mt-4">
                             <a href="{{ route('blog.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-300 focus:outline-none focus:border-gray-300 focus:ring ring-gray-200 disabled:opacity-25 transition ease-in-out duration-150">
                                 {{ __('Cancel') }}
