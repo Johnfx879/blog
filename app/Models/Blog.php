@@ -16,4 +16,16 @@ class Blog extends Model
         'content',
         'status',
     ];
+
+    public function scopeSearch($query, $search)
+    {
+        if (!$search) {
+            return $query;
+        }
+
+        return $query->where(function ($query) use ($search) {
+            $query->where('title', 'LIKE', "%$search%")
+                ->orWhere('content', 'LIKE', "%$search%");
+        });
+    }
 }
