@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreblogRequest;
 use App\Http\Requests\UpdateblogRequest;
 
@@ -11,9 +12,14 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $blogs = Blog::paginate(10);
+        $search = $request->input('search');
+
+        $blogs = Blog::query()
+                 ->search($search)
+                 ->paginate(10);
+
         return view('blogs.index', compact('blogs'));
     }
 
