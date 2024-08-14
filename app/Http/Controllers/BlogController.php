@@ -15,9 +15,11 @@ class BlogController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $status = $request->input('status', 'draft');
 
         $blogs = Blog::query()
                  ->search($search)
+                 ->where('status', $status)
                  ->paginate(10);
 
         return view('blogs.index', compact('blogs'));
