@@ -16,12 +16,10 @@ class BlogController extends Controller
     {
         $search = $request->input('search');
         $status = $request->input('status', 'draft');
-        $sortOrder = $request->input('sort', 'desc');
 
         $blogs = Blog::query()
                  ->search($search)
                  ->where('status', $status)
-                 ->orderBy('created_at', $sortOrder)
                  ->paginate(10);
 
         return view('blogs.index', compact('blogs'));
