@@ -30,13 +30,13 @@
                     <select name="status" id="status"
                         class="px-4 py-2 w-40 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         onchange="this.form.submit()">
+                        <option value="" {{ request('status') == '' ? 'selected' : '' }}>Default</option>
                         <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
                         <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published</option>
                         <option value="archived" {{ request('status') == 'archived' ? 'selected' : '' }}>Archived</option>
                     </select>
                 </form>
             </div>
-
             <div class="flex items-center space-x-2">
                 <form id="sort-form" action="{{ route('blog.index') }}" method="GET" class="flex items-center space-x-2">
                     <input type="hidden" name="search" value="{{ request('search') }}">
@@ -44,7 +44,7 @@
             
                     <label for="sort-by" class="font-semibold text-gray-700">Sort By</label>
                     <select id="sort-by" name="sort_by" 
-                            class="w-48 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            class="px-4 py-2 w-40 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             onchange="this.form.submit()">
                         <option value="created_at" {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>Created At</option>
                         <option value="updated_at" {{ request('sort_by') == 'updated_at' ? 'selected' : '' }}>Updated At</option>
@@ -59,12 +59,10 @@
                 </form>
             </div>
         </div>
-
         <form action="{{ route('blog.index') }}" method="GET" class="relative flex items-center">
             <input type="search" name="search" id="search-input" value="{{ request('search') }}"
                 placeholder="Search posts"
                 class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-
             @if (request('search'))
                 <button type="button" id="clear-search"
                     class="absolute right-0 top-0 mt-2 mr-2 text-gray-500 hover:text-gray-700 focus:outline-none">
