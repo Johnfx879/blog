@@ -15,13 +15,15 @@ class BlogController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $status = $request->input('status', 'draft');
+        $status = $request->input('status');
         $sort_by = $request->input('sort_by', 'created_at');
         $sort_order = $request->input('sort_order', 'asc');
 
         $blogs = Blog::query()
             ->search($search)
-            ->where('status', $status)
+            ->when($status && $status !== 'default', function ($query) use ($status) {
+                $query->where('status', $status);
+            })
             ->orderBy($sort_by, $sort_order)
             ->paginate(10);
 
