@@ -23,17 +23,41 @@
     </div>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-2 flex justify-between items-center">
-        <div class="flex items-center">
-            <label for="status" class="mr-2 font-semibold text-gray-700">Status</label>
-            <form id="status-form" action="{{ route('blog.index') }}" method="GET" class="flex items-center">
-                <select name="status" id="status"
-                    class="px-4 py-2 w-40 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    onchange="this.form.submit()">
-                    <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
-                    <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published</option>
-                    <option value="archived" {{ request('status') == 'archived' ? 'selected' : '' }}>Archived</option>
-                </select>
-            </form>
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center">
+                <label for="status" class="mr-2 font-semibold text-gray-700">Status</label>
+                <form id="status-form" action="{{ route('blog.index') }}" method="GET" class="flex items-center">
+                    <select name="status" id="status"
+                        class="px-4 py-2 w-40 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        onchange="this.form.submit()">
+                        <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
+                        <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published</option>
+                        <option value="archived" {{ request('status') == 'archived' ? 'selected' : '' }}>Archived</option>
+                    </select>
+                </form>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <form id="sort-form" action="{{ route('blog.index') }}" method="GET" class="flex items-center space-x-2">
+                    <input type="hidden" name="search" value="{{ request('search') }}">
+                    <input type="hidden" name="status" value="{{ request('status') }}">
+            
+                    <label for="sort-by" class="font-semibold text-gray-700">Sort By</label>
+                    <select id="sort-by" name="sort_by" 
+                            class="w-48 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            onchange="this.form.submit()">
+                        <option value="created_at" {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>Created At</option>
+                        <option value="updated_at" {{ request('sort_by') == 'updated_at' ? 'selected' : '' }}>Updated At</option>
+                    </select>
+                    
+                    <select id="sort-order" name="sort_order" 
+                            class="w-28 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            onchange="this.form.submit()">
+                        <option value="asc" {{ request('sort_order') == 'asc' ? 'selected' : '' }}>ASC</option>
+                        <option value="desc" {{ request('sort_order') == 'desc' ? 'selected' : '' }}>DESC</option>
+                    </select>
+                </form>
+            </div>
         </div>
 
         <form action="{{ route('blog.index') }}" method="GET" class="relative flex items-center">
