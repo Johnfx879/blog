@@ -19,15 +19,18 @@ class BlogController extends Controller
         $sort_by = $request->input('sort_by', 'created_at');
         $sort_order = $request->input('sort_order', 'asc');
 
-        $blogs = Blog::query()
-            ->search($search)
-            ->when($status && $status !== 'default', function ($query) use ($status) {
-                $query->where('status', $status);
-            })
-            ->orderBy($sort_by, $sort_order)
+        $blogs = Blog::query()->search($search);
+
+        if ($status !== 'default') {
+            $blogs->where('status', $status);
+        }
+
+        $blogs = $blogs->orderBy($sort_by, $sort_order)
             ->paginate(10);
 
-        return view('blogs.index', compact('blogs'));
+        return view('blogs.index', compact('blogs'))
+            ->with('status', $status)
+            ->with('search', $search);
     }
 
     /**
