@@ -15,7 +15,7 @@ class BlogController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $status = $request->input('status');
+        $status = $request->input('status', 'default');
         $sort_by = $request->input('sort_by', 'created_at');
         $sort_order = $request->input('sort_order', 'asc');
 
@@ -25,8 +25,7 @@ class BlogController extends Controller
             $blogs->where('status', $status);
         }
 
-        $blogs = $blogs->orderBy($sort_by, $sort_order)
-            ->paginate(10);
+        $blogs = $blogs->orderBy($sort_by, $sort_order)->paginate(10);
 
         return view('blogs.index', compact('blogs'))
             ->with('status', $status)
