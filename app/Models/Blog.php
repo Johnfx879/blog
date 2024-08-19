@@ -28,4 +28,10 @@ class Blog extends Model
                 ->orWhere('content', 'LIKE', "%$search%");
         });
     }
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
