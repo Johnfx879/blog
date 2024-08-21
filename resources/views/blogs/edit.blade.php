@@ -28,6 +28,20 @@
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
+
+                        <div>
+                            <label for="category_id" class="block text-sm font-medium text-gray-700">{{ __('Category') }}</label>
+                            <select id="category_id" name="category_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('category_id') border-red-500 @enderror">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id', $blog->category_id) == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
                         
                         <div>
                             <label for="status" class="block text-sm font-medium text-gray-700">{{ __('Status') }}</label>
@@ -36,7 +50,11 @@
                                 <option value="published" {{ old('status', $blog->status) == 'published' ? 'selected' : '' }}>{{ __('Published') }}</option>
                                 <option value="archived" {{ old('status', $blog->status) == 'archived' ? 'selected' : '' }}>{{ __('Archived') }}</option>
                             </select>
-                            
+                            @error('status')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
                             <a href="{{ route('blog.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-300 focus:outline-none focus:border-gray-300 focus:ring ring-gray-200 disabled:opacity-25 transition ease-in-out duration-150">
                                 {{ __('Cancel') }}
