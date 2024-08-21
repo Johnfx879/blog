@@ -22,6 +22,50 @@
         </a>
     </div>
 
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-2 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <form id="sort-form" action="{{ route('categories.index') }}" method="GET"
+                class="flex items-center space-x-2">
+                <input type="hidden" name="search" value="{{ request('search') }}">
+
+                <label for="sort-by" class="font-semibold text-gray-700">Sort By</label>
+                <select id="sort-by" name="sort_by"
+                    class="px-4 py-2 w-40 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    onchange="this.form.submit()">
+                    <option value="created_at" {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>Created
+                        At</option>
+                    <option value="updated_at" {{ request('sort_by') == 'updated_at' ? 'selected' : '' }}>Updated
+                        At</option>
+                </select>
+
+                <select id="sort-order" name="sort_order"
+                    class="w-28 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    onchange="this.form.submit()">
+                    <option value="asc" {{ request('sort_order') == 'asc' ? 'selected' : '' }}>ASC</option>
+                    <option value="desc" {{ request('sort_order') == 'desc' ? 'selected' : '' }}>DESC</option>
+                </select>
+            </form>
+        </div>
+
+        <form action="{{ route('categories.index') }}" method="GET" class="relative flex items-center">
+            <input type="hidden" name="sort_by" value="{{ request('sort_by', 'created_at') }}">
+            <input type="hidden" name="sort_order" value="{{ request('sort_order', 'asc') }}">
+            <input type="search" name="search" id="search-input" value="{{ request('search') }}"
+                placeholder="Search categories"
+                class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            @if (request('search'))
+                <button type="button" id="clear-search"
+                    class="absolute right-0 top-0 mt-2 mr-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                    &times;
+                </button>
+            @endif
+            <button type="submit"
+                class="ml-2 px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-200 disabled:opacity-25 transition ease-in-out duration-150">
+                Search
+            </button>
+        </form>
+    </div>
+
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
