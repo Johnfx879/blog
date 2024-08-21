@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreblogRequest;
 use App\Http\Requests\UpdateblogRequest;
@@ -14,22 +15,29 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->input('search');
         $status = $request->input('status', 'default');
-        $sort_by = $request->input('sort_by', 'created_at');
-        $sort_order = $request->input('sort_order', 'asc');
+        $search = $request->input('search');
+        $sortBy = $request->input('sort_by', 'created_at');
+        $sortOrder = $request->input('sort_order', 'desc');
 
-        $blogs = Blog::query()->search($search);
+        $query = Blog::query();
 
         if ($status !== 'default') {
-            $blogs->where('status', $status);
+            $query->where('status', $status);
         }
 
-        $blogs = $blogs->orderBy($sort_by, $sort_order)->paginate(10);
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('content', 'like', '%' . $search . '%');
+            });
+        }
 
-        return view('blogs.index', compact('blogs'))
-            ->with('status', $status)
-            ->with('search', $search);
+        $query->orderBy($sortBy, $sortOrder);
+
+        $blogs = $query->paginate(10);
+
+        return view('blogs.index', compact('blogs'));
     }
 
     /**
@@ -37,7 +45,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('blogs.create');
+        $categories = Category::all();
+        return view('blogs.create', compact('categories'));
     }
 
     /**
@@ -55,7 +64,8 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('blogs.edit', compact('blog'));
+        $categories = Category::all();
+        return view('blogs.edit', compact('blog', 'categories'));
     }
 
     /**
