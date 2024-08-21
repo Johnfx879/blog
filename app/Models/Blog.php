@@ -15,6 +15,7 @@ class Blog extends Model
         'title',
         'content',
         'status',
+        'category_id',
     ];
 
     public function scopeSearch($query, $search)
