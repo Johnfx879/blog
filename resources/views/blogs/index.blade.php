@@ -30,10 +30,13 @@
                     <select name="status" id="status"
                         class="px-4 py-2 w-40 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         onchange="this.form.submit()">
-                        <option value="default" {{ request('status', 'default') == 'default' ? 'selected' : '' }}>Default</option>
+                        <option value="default" {{ request('status', 'default') == 'default' ? 'selected' : '' }}>
+                            Default</option>
                         <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
-                        <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published</option>
-                        <option value="archived" {{ request('status') == 'archived' ? 'selected' : '' }}>Archived</option>
+                        <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published
+                        </option>
+                        <option value="archived" {{ request('status') == 'archived' ? 'selected' : '' }}>Archived
+                        </option>
                     </select>
                 </form>
             </div>
@@ -56,8 +59,8 @@
                     <select id="sort-order" name="sort_order"
                         class="w-28 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         onchange="this.form.submit()">
-                        <option value="asc" {{ request('sort_order') == 'asc' ? 'selected' : '' }}>ASC</option>
-                        <option value="desc" {{ request('sort_order') == 'desc' ? 'selected' : '' }}>DESC</option>
+                        <option value="asc" {{ request('sort_order', 'desc') == 'asc' ? 'selected' : '' }}>ASC</option>
+                        <option value="desc" {{ request('sort_order', 'desc') == 'desc' ? 'selected' : '' }}>DESC</option>
                     </select>
                 </form>
             </div>
