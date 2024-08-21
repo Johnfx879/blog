@@ -17,6 +17,7 @@
                         <div>
                             <label for="title" class="block text-sm font-medium text-gray-700">{{ __('Title') }}</label>
                             <input id="title" name="title" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('title') border-red-500 @enderror" value="{{ old('title') }}">
+                            
                             @error('title')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
@@ -25,9 +26,21 @@
                         <div>
                             <label for="content" class="block text-sm font-medium text-gray-700">{{ __('Content') }}</label>
                             <textarea id="content" name="content" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('content') border-red-500 @enderror">{{ old('content') }}</textarea>
+                            
                             @error('content')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
+                        </div>
+
+                        <div>
+                            <label for="category_id" class="block text-sm font-medium text-gray-700">{{ __('Category') }}</label>
+                            <select id="category_id" name="category_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div>
@@ -37,19 +50,6 @@
                                 <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>{{ __('Published') }}</option>
                                 <option value="archived" {{ old('status') == 'archived' ? 'selected' : '' }}>{{ __('Archived') }}</option>
                             </select>
-                        </div>
-
-                        <div>
-                            <label for="category_id" class="block text-sm font-medium text-gray-700">{{ __('Category') }}</label>
-                            <select id="category_id" name="category_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <option value="">{{ __('Select Category') }}</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('category_id')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                            @enderror
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
