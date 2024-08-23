@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreblogRequest;
-use App\Http\Requests\UpdateblogRequest;
+use App\Http\Requests\StoreBlogRequest;
+use App\Http\Requests\UpdateBlogRequest;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -52,9 +53,16 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreblogRequest $request)
+    public function store(StoreBlogRequest $request)
     {
-        Blog::create($request->all());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+            $data['image'] = $path;
+        }
+
+        Blog::create($data);
 
         return redirect()->route('blog.index')->with('success', 'Post created successfully.');
     }
@@ -71,9 +79,20 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateblogRequest $request, Blog $blog)
+    public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        $blog->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if ($blog->image) {
+                Storage::disk('public')->delete($blog->image);
+            }
+
+            $path = $request->file('image')->store('images', 'public');
+            $data['image'] = $path;
+        }
+
+        $blog->update($data);
 
         return redirect()->route('blog.index')->with('success', 'Post updated successfully.');
     }
@@ -83,6 +102,10 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        if ($blog->image) {
+            Storage::disk('public')->delete($blog->image);
+        }
+
         $blog->delete();
 
         return redirect()->route('blog.index')->with('success', 'Post deleted successfully.');
