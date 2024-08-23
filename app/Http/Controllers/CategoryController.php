@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         $search = $request->input('search');
         $sort_by = $request->input('sort_by', 'created_at');
-        $sort_order = $request->input('sort_order', 'desc'); // Default to 'desc'
+        $sort_order = $request->input('sort_order', 'desc');
 
         $categories = Category::query();
 
