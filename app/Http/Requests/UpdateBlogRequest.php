@@ -11,7 +11,7 @@ class UpdateBlogRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; // Change this to `true` to allow the request
+        return true;
     }
 
     /**
@@ -25,6 +25,7 @@ class UpdateBlogRequest extends FormRequest
             'title' => 'required|string|min:5|max:20',
             'content' => 'required|string',
             'status' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }
