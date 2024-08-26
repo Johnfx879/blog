@@ -88,19 +88,23 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     @foreach ($blogs as $blog)
-                        <div class="py-4 px-2 border-b border-gray-300">
-                            <a href="{{ route('blog.show', $blog) }}"
-                                class="text-xl font-semibold block">{{ $blog->title }}</a>
-                            <p class="text-sm text-gray-600">
-                                {{ $blog->created_at->diffForHumans() }}
-                            </p>
-                            <p class="mt-2 text-gray-800">
-                                {{ Str::limit($blog->content, 100) }}
-                            </p>
-                            <span
-                                class="inline-block px-2 py-1 mt-2 text-xs font-semibold text-white {{ $blog->status == 'published' ? 'bg-green-500' : 'bg-red-500' }}">
-                                {{ ucfirst($blog->status) }}
-                            </span>
+                        <div class="py-4 px-2 border-b border-gray-300 flex items-center">
+                            <!-- Displaying the image next to the title -->
+                            @if ($blog->image)
+                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="w-16 h-16 object-cover rounded-md mr-4">
+                            @endif
+                            <div class="flex-grow">
+                                <a href="{{ route('blog.show', $blog) }}" class="text-xl font-semibold block">{{ $blog->title }}</a>
+                                <p class="text-sm text-gray-600">
+                                    {{ $blog->created_at->diffForHumans() }}
+                                </p>
+                                <p class="mt-2 text-gray-800">
+                                    {{ Str::limit($blog->content, 100) }}
+                                </p>
+                                <span class="inline-block px-2 py-1 mt-2 text-xs font-semibold text-white {{ $blog->status == 'published' ? 'bg-green-500' : 'bg-red-500' }}">
+                                    {{ ucfirst($blog->status) }}
+                                </span>
+                            </div>
                             <div class="mt-4">
                                 <a href="{{ route('blog.edit', $blog) }}"
                                     class="inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-600 focus:outline-none focus:border-yellow-700 focus:ring ring-yellow-200 disabled:opacity-25 transition ease-in-out duration-150">Edit</a>
