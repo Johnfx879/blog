@@ -16,6 +16,7 @@ class Blog extends Model
         'content',
         'status',
         'category_id',
+        'image',
     ];
 
     public function scopeSearch($query, $search)
@@ -29,7 +30,6 @@ class Blog extends Model
                 ->orWhere('content', 'LIKE', "%$search%");
         });
     }
-
 
     public function category()
     {
