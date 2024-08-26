@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white relative overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <form method="POST" action="{{ route('blog.update', $blog->id) }}">
+                <form method="POST" action="{{ route('blog.update', $blog->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -41,6 +41,20 @@
                             @error('category_id')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
+                        </div>
+                        <div>
+                            <label for="image" class="block text-sm font-medium text-gray-700">{{ __('Image') }}</label>
+                            <input id="image" name="image" type="file" accept="image/*" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('image') border-red-500 @enderror">
+                            @error('image')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+
+                            @if($blog->image)
+                                <div class="mt-4">
+                                    <p class="text-sm font-medium text-gray-700">{{ __('Current Image') }}</p>
+                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="mt-2 h-48 w-full object-cover rounded-md">
+                                </div>
+                            @endif
                         </div>
                         
                         <div>
