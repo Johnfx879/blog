@@ -15,7 +15,7 @@ class BlogFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->text(30),
+            'title' => $this->faker->text(150),
             'content' => $this->faker->paragraph,
             'status' => $this->faker->randomElement(['draft', 'published', 'archived']),
         ];
