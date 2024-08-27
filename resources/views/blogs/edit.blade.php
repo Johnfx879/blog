@@ -55,7 +55,7 @@
                             @if($blog->image)
                                 <div class="mt-4">
                                     <p class="text-sm font-medium text-gray-700">{{ __('Current Image') }}</p>
-                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="mt-2 h-48 w-full object-cover rounded-md border border-gray-300">
+                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="mt-2 h-24 w-24 object-cover rounded-md border border-gray-300">
                                 </div>
                             @endif
                         </div>
