@@ -44,15 +44,18 @@
                         </div>
                         <div>
                             <label for="image" class="block text-sm font-medium text-gray-700">{{ __('Image') }}</label>
-                            <input id="image" name="image" type="file" accept="image/*" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm @error('image') border-red-500 @enderror">
+                            <div class="mt-1 block w-full rounded-md shadow-sm border border-gray-300 p-2">
+                                <input id="image" name="image" type="file" accept="image/*" 
+                                       class="w-full text-gray-600 border-none focus:ring-0 focus:outline-none @error('image') border-red-500 @enderror">
+                            </div>
                             @error('image')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
-
+                        
                             @if($blog->image)
                                 <div class="mt-4">
                                     <p class="text-sm font-medium text-gray-700">{{ __('Current Image') }}</p>
-                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="mt-2 h-48 w-full object-cover rounded-md">
+                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="mt-2 h-48 w-full object-cover rounded-md border border-gray-300">
                                 </div>
                             @endif
                         </div>
