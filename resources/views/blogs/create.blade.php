@@ -10,7 +10,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white relative overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <form method="POST" action="{{ route('blog.store') }}">
+                <form method="POST" action="{{ route('blog.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="grid grid-cols-1 gap-6">
@@ -41,6 +41,17 @@
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div>
+                            <label for="image" class="block text-sm font-medium text-gray-700">{{ __('Image') }}</label>
+                            <div class="mt-1 block w-full rounded-md shadow-sm border border-gray-300 p-2">
+                                <input id="image" name="image" type="file" accept="image/*" 
+                                       class="w-full text-gray-600 border-none focus:ring-0 focus:outline-none @error('image') border-red-500 @enderror">
+                            </div>
+                            @error('image')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div>
